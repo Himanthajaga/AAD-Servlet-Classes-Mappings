@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application</title>
+</head>
+<body>
+<h1>This is web Application</h1>
+<button id="btn">Send A request</button>
+<script src="Assests/JS/jquery-3.7.1.min.js"></script>
+<script>
+    $("#btn").click(function(){
+        $('#tbl').show();
+        console.log('Request started');
+        $.ajax({
+            // url: 'DB/data.json',
+            url: 'http://localhost:8080/HelloServlet_Web_exploded/hello',
+            //method: 'OPTIONS',
+            async: false,
+            success: function(response) {
+                var tbody = $('#tbl tbody');
+                tbody.empty(); // Clear existing rows
+                response.forEach(function(item) {
+                    var row = '<tr>' +
+                        '<td>' + item.userId + '</td>' +
+                        '<td>' + item.id + '</td>' +
+                        '<td>' + item.title + '</td>' +
+                        '<td>' + item.body + '</td>' +
+                        '</tr>';
+                    tbody.append(row);
+                });
+                console.log('Data loaded successfully');
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        console.log('Request finished');
+    });
+    // console.log("Button Clicked")
+    // var http =new XMLHttpRequest();
+    // console.log(http.readyState,'After theXMLHttpRequest object created');
+    //fix the open state issue
+    // http.open( 'GET','index.html');
+    // http.send();
+
+    // http.open('GET','Assests/Images/img.jpg');
+    // http.open('GET','DB/db.txt',false);
+    // console.log(http.readyState,'After the open method');
+    // console.log(http.responseType = 'blob');
+    // console.log(http.readyState,'After the responsetext print');
+
+    // http.send();
+    // console.log(http.readyState,'After the send method');
+    // http.onreadystatechange = function () {
+    // console.log('test')
+    //  console.log(http.readyState,'Inside on ready state Change Event');
+    //  console.log(http.responseType);
+    //     if(http.readyState === 4 && http.status === 200){
+    //         //console.log(http.responseText);
+    //         document.getElementById('para').innerText = http.responseType;
+    //         // $('#new').attr('src','Assests/Images/img.jpg').show();
+    //     }
+    //     console.log(http.readyState);
+    //     console.log(http.status);
+    //     console.log(http.responseType);
+    // }
+    //     console.log('Request finished');
+    // });
+</script>
+
+</body>
+</html>
